@@ -4,6 +4,45 @@
         <name>BookStore-API</name>
     </assembly>
     <members>
+        <member name="T:BookStore_API.Controllers.AuthorsController">
+            <summary>
+            Endpoint usado para interactuar con la tabla Authors de la base de datos
+            </summary>
+        </member>
+        <member name="M:BookStore_API.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Obtener todos los autores
+            </summary>
+            <returns>List de autores</returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.AuthorsController.GetAuthor(System.Int32)">
+            <summary>
+            Obtener un solo autor
+            </summary>
+            <param name="id"></param>
+            <returns>Una instancia de Author</returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.AuthorsController.Create(BookStore_API.DTOs.AuthorCreateDTO)">
+            <summary>
+            Crea un autor nuevo
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.AuthorsController.Update(System.Int32,BookStore_API.DTOs.AuthorUpdateDTO)">
+            <summary>
+            Edita o actualiza un autor
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.AuthorsController.Delete(System.Int32)">
+            <summary>
+            Edita o actualiza un autor
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
         <member name="T:BookStore_API.Controllers.HomeController">
             <summary>
              Este es un controlador de prueba
@@ -14,6 +53,11 @@
              una función para Get
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:BookStore_API.DTOs.AuthorCreateDTO">
+            <summary>
+            Esta clase dentro del DTO se crea unicamente para crear un nuevo registro
+            </summary>
         </member>
     </members>
 </doc>

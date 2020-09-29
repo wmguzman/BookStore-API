@@ -16,6 +16,9 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using BookStore_API.Services;
+using AutoMapper;
+using BookStore_API.Mappings;
+using BookStore_API.Contracts;
 
 namespace BookStore_API
 {
@@ -46,6 +49,9 @@ namespace BookStore_API
                     .AllowAnyMethod());
             });
 
+            //Aquí se configura el servicio Automapper para abstraer y conectar con las clases que representan la base de datos. Se relaciona con la carpeta Data/Mappings creada
+            services.AddAutoMapper(typeof(Maps));
+
             //Aquí se configura swashbuckler swager que se acaba de instalar 3 modulos usando nuget
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
@@ -60,6 +66,9 @@ namespace BookStore_API
 
             //Aquí se inicia el logger que se creó con NLog
             services.AddSingleton<ILoggerService, LoggerService>();
+
+            //Aquí se instancian los repositorios de cada servicio que creamos para manejar y conectar con la base de datos.
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
 
             services.AddControllers();
             //services.AddRazorPages();
