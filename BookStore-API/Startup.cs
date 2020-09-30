@@ -69,6 +69,7 @@ namespace BookStore_API
 
             //Aquí se instancian los repositorios de cada servicio que creamos para manejar y conectar con la base de datos.
             services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
 
             services.AddControllers();
             //services.AddRazorPages();

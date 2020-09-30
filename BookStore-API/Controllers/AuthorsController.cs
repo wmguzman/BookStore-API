@@ -20,14 +20,14 @@ namespace BookStore_API.Controllers
     [ProducesResponseType(StatusCodes.Status200OK)]
     public class AuthorsController : ControllerBase
     {
-        private readonly IAuthorRepository _authorReporitory;
+        private readonly IAuthorRepository _authorRepository;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-        public AuthorsController(IAuthorRepository authorReporitory,
+        public AuthorsController(IAuthorRepository authorRepository,
             ILoggerService logger,
             IMapper mapper)
         {
-            _authorReporitory = authorReporitory;
+            _authorRepository = authorRepository;
             _logger = logger;
             _mapper = mapper;
         }
@@ -44,7 +44,7 @@ namespace BookStore_API.Controllers
             try
             {
                 _logger.LogInfo("Intentando GetAuthors");
-                var authors = await _authorReporitory.FindAll();
+                var authors = await _authorRepository.FindAll();
                 var response = _mapper.Map<IList<AuthorDTO>>(authors);
                 _logger.LogInfo("Obtuvo todos los autores exitosamente");
                 return Ok(response);
@@ -69,7 +69,7 @@ namespace BookStore_API.Controllers
             try
             {
                 _logger.LogInfo($"Intentando GetAuthor con el id: {id}");
-                var author = await _authorReporitory.FindById(id);
+                var author = await _authorRepository.FindById(id);
                 if (author == null)
                 {
                     _logger.LogWarn($"No se encontró el autor con id: {id}");
@@ -111,7 +111,7 @@ namespace BookStore_API.Controllers
                     return BadRequest(ModelState);
                 }
                 var author = _mapper.Map<Author>(authorDTO);
-                var isSuccess = await _authorReporitory.Create(author);
+                var isSuccess = await _authorRepository.Create(author);
                 if (!isSuccess)
                 {
                     _logger.LogError($"AuthorsController La creacion de autor nuevo falló");
@@ -145,7 +145,7 @@ namespace BookStore_API.Controllers
                     _logger.LogWarn($"AuthorsController La petición de editar un autor se hizo sin datos o una id incorrecta");
                     return BadRequest(ModelState);
                 }
-                var authorExists = await _authorReporitory.Exists(id);
+                var authorExists = await _authorRepository.Exists(id);
                 if (!authorExists)
                 {
                     _logger.LogWarn($"AuthorsController El autor con id {id} no existe");
@@ -157,7 +157,7 @@ namespace BookStore_API.Controllers
                     return BadRequest(ModelState);
                 }
                 var author = _mapper.Map<Author>(authorDTO);
-                var isSuccess = await _authorReporitory.Update(author);
+                var isSuccess = await _authorRepository.Update(author);
                 if (!isSuccess)
                 {
                     _logger.LogError($"AuthorsController La edicion del autor cin id {id} falló");
@@ -174,9 +174,9 @@ namespace BookStore_API.Controllers
 
 
         /// <summary>
-        /// Edita o actualiza un autor
+        /// Elimina un autor
         /// </summary>
-        /// <param name="authorDTO"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -192,14 +192,14 @@ namespace BookStore_API.Controllers
                     _logger.LogWarn($"AuthorsController id incorrecto para eliminar");
                     return BadRequest();
                 }
-                var authorExists = await _authorReporitory.Exists(id);
+                var authorExists = await _authorRepository.Exists(id);
                 if (!authorExists)
                 {
                     _logger.LogWarn($"AuthorsController El autor con id {id} no existe");
                     return NotFound();
                 }
-                var author = await _authorReporitory.FindById(id);
-                var isSuccess = await _authorReporitory.Delete(author);
+                var author = await _authorRepository.FindById(id);
+                var isSuccess = await _authorRepository.Delete(author);
                 if (!isSuccess)
                 {
                     _logger.LogError($"AuthorsController no se pudo eliminar el autor de id {id}");

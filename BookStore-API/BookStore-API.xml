@@ -38,9 +38,43 @@
         </member>
         <member name="M:BookStore_API.Controllers.AuthorsController.Delete(System.Int32)">
             <summary>
+            Elimina un autor
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.GetBooks">
+            <summary>
+            Obtener todos los libros
+            </summary>
+            <returns>List de autores</returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.GetBook(System.Int32)">
+            <summary>
+            Obtener un solo libro
+            </summary>
+            <param name="id"></param>
+            <returns>Una instancia de Libro</returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.Create(BookStore_API.DTOs.BookCreateDTO)">
+            <summary>
+            Crea un libro nuevo
+            </summary>
+            <param name="bookDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.Update(System.Int32,BookStore_API.DTOs.BookUpdateDTO)">
+            <summary>
+            Edita o actualiza un libro
+            </summary>
+            <param name="bookDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.BooksController.Delete(System.Int32)">
+            <summary>
             Edita o actualiza un autor
             </summary>
-            <param name="authorDTO"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:BookStore_API.Controllers.HomeController">
@@ -55,6 +89,11 @@
             <returns></returns>
         </member>
         <member name="T:BookStore_API.DTOs.AuthorCreateDTO">
+            <summary>
+            Esta clase dentro del DTO se crea unicamente para crear un nuevo registro
+            </summary>
+        </member>
+        <member name="T:BookStore_API.DTOs.BookCreateDTO">
             <summary>
             Esta clase dentro del DTO se crea unicamente para crear un nuevo registro
             </summary>
