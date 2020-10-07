@@ -33,6 +33,7 @@
             <summary>
             Edita o actualiza un autor
             </summary>
+            <param name="id"></param>
             <param name="authorDTO"></param>
             <returns></returns>
         </member>
@@ -86,6 +87,13 @@
             <summary>
              una función para Get
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BookStore_API.Controllers.UsersController.Login(BookStore_API.DTOs.UserDTO)">
+            <summary>
+            User Login endpoint
+            </summary>
+            <param name="userDTO"></param>
             <returns></returns>
         </member>
         <member name="T:BookStore_API.DTOs.AuthorCreateDTO">

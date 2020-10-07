@@ -19,6 +19,10 @@ using BookStore_API.Services;
 using AutoMapper;
 using BookStore_API.Mappings;
 using BookStore_API.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookStore_API
 {
@@ -37,7 +41,8 @@ namespace BookStore_API
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(/*options => options.SignIn.RequireConfirmedAccount = true*/)//Lo del comentario requiere registro con confirmacion de email
+                .AddRoles<IdentityRole>()//Esta línea se agregó para que Identity funcione con Roles también
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //Aquí se configura CORS
@@ -51,6 +56,20 @@ namespace BookStore_API
 
             //Aquí se configura el servicio Automapper para abstraer y conectar con las clases que representan la base de datos. Se relaciona con la carpeta Data/Mappings creada
             services.AddAutoMapper(typeof(Maps));
+
+            //Aquí se configura JWT
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
 
             //Aquí se configura swashbuckler swager que se acaba de instalar 3 modulos usando nuget
             services.AddSwaggerGen(c => {
@@ -76,7 +95,10 @@ namespace BookStore_API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IWebHostEnvironment env,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -103,6 +125,9 @@ namespace BookStore_API
 
             //Aquí usamos el CORS que se configuró antes
             app.UseCors("CorsPolicy");
+
+            //Aquí se inicia los usuarios y roles ficticios para probar
+            SeedData.Seed(userManager, roleManager).Wait();
 
             app.UseRouting();
 

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore-API", "BookStore-API\BookStore-API.csproj", "{71953748-FE8A-46F3-9AFD-11C34CD180C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore-API", "BookStore-API\BookStore-API.csproj", "{71953748-FE8A-46F3-9AFD-11C34CD180C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crafyc-API", "..\Crafyc-API\Crafyc-API\Crafyc-API.csproj", "{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{71953748-FE8A-46F3-9AFD-11C34CD180C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71953748-FE8A-46F3-9AFD-11C34CD180C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71953748-FE8A-46F3-9AFD-11C34CD180C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
