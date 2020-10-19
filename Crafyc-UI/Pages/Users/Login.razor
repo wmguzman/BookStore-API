@@ -1,0 +1,55 @@
+﻿@page "/login"
+
+@using Crafyc_UI.Models
+@using Crafyc_UI.Contracts
+@using Crafyc_UI.Services
+
+@inject NavigationManager _navigation
+@inject IAuthenticationRepository _repository
+
+<div class="card">
+    <h3 class="card-title">Login</h3>
+    @if (!response)
+    {
+        <div class="alert alert-danger">
+            <p>Something went wrong with the login attempt</p>
+        </div>
+    }
+    <div class="card-body">
+        <EditForm Model="model" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <InputText Id="email" class="form-control" @bind-Value="model.EmailAddress" />
+                <ValidationMessage For="@(() => model.EmailAddress)" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText Id="password" type="password" class="form-control" @bind-Value="model.Password" />
+                <ValidationMessage For="@(() => model.Password)" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private LoginModel model = new LoginModel();
+
+    private bool response = true;
+
+    private async Task HandleLogin()
+    {
+        var response = await _repository.Login(model);
+
+        if (response)
+        {
+            _navigation.NavigateTo("/home");
+        }
+        
+
+
+
+    }
+}

@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore-API", "BookStore-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crafyc-API", "..\Crafyc-API\Crafyc-API\Crafyc-API.csproj", "{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore-UI", "BookStore-UI\BookStore-UI.csproj", "{4AF9ECE4-389B-45E9-A6FD-B6BE6D80F6D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crafyc-UI", "Crafyc-UI\Crafyc-UI.csproj", "{9AE7818B-DD32-4AC2-9BCA-0917DC835144}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F837BA89-A6C3-400A-8ADC-819A0AB35EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF9ECE4-389B-45E9-A6FD-B6BE6D80F6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF9ECE4-389B-45E9-A6FD-B6BE6D80F6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF9ECE4-389B-45E9-A6FD-B6BE6D80F6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF9ECE4-389B-45E9-A6FD-B6BE6D80F6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE7818B-DD32-4AC2-9BCA-0917DC835144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE7818B-DD32-4AC2-9BCA-0917DC835144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE7818B-DD32-4AC2-9BCA-0917DC835144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE7818B-DD32-4AC2-9BCA-0917DC835144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

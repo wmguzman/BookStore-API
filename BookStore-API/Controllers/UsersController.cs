@@ -39,10 +39,52 @@ namespace BookStore_API.Controllers
         }
 
         /// <summary>
+        /// User Registration endpoint
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
+        [Route("Register")] // Esto es para diferenciar de Login que tambien es HttpPost
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.LogInfo($"{location} - Intentando Register()");
+                var username = userDTO.EmailAddress;
+                var password = userDTO.Password;
+                var user = new IdentityUser
+                {
+                    Email = username,
+                    UserName = username
+                };
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInfo($"{location} - Registro fue exitoso");
+                    return Ok(new { result.Succeeded });
+                    //return Ok();
+                }
+                _logger.LogWarn($"{location} - User Registration failed");
+                foreach(var error in result.Errors)
+                {
+                    _logger.LogError($"{location}: {error.Code} - {error.Description}");
+                };
+                return StatusCode(500, "User Registration failed");
+            }
+            catch (Exception e)
+            {
+                return InternalError(e);
+            }
+        }
+
+        /// <summary>
         /// User Login endpoint
         /// </summary>
         /// <param name="userDTO"></param>
         /// <returns></returns>
+        [Route("Login")] // Esto es para diferenciar de Register que tambien es HttpPost
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO userDTO)
@@ -51,7 +93,7 @@ namespace BookStore_API.Controllers
             try
             {
                 _logger.LogInfo($"{location} - Intentando Login()");
-                var username = userDTO.Username;
+                var username = userDTO.EmailAddress;
                 var password = userDTO.Password;
                 var result = await _signinManager.PasswordSignInAsync(username, password, false, false);
                 if (result.Succeeded)

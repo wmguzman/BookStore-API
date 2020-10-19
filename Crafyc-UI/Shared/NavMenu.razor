@@ -1,0 +1,148 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">Crafyc-UI</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <AuthorizeView>
+            <Authorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link">
+                        <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity.Name
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="logout">
+                        <span class="oi oi-arrow-circle-left" aria-hidden="true"></span> Log out
+                    </NavLink>
+                </li>
+            </Authorized>
+            <NotAuthorized>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="login">
+                        <span class="oi oi-account-login" aria-hidden="true"></span> Login
+                    </NavLink>
+                </li>
+            </NotAuthorized>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="aseguradoras">
+                    <span class="oi oi-briefcase" aria-hidden="true"></span> Aseguradoras
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="cartera">
+                    <span class="oi oi-dashboard" aria-hidden="true"></span> Cartera
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="ciudades">
+                    <span class="oi oi-map-marker" aria-hidden="true"></span> Ciudades
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo, Comercial">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="clientes">
+                    <span class="oi oi-people" aria-hidden="true"></span> Clientes
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="creditos">
+                    <span class="oi oi-calculator" aria-hidden="true"></span> Creditos
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="cronogramas">
+                    <span class="oi oi-calendar" aria-hidden="true"></span> Cronogramas
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="estadosdecredito">
+                    <span class="oi oi-task" aria-hidden="true"></span> Estados de credito
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="intermediarios">
+                    <span class="oi oi-signpost" aria-hidden="true"></span> Intermediarios
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="movimientos">
+                    <span class="oi oi-dollar" aria-hidden="true"></span> Movimientos
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador, Operativo, Comercial">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="polizas">
+                    <span class="oi oi-document" aria-hidden="true"></span> Polizas
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="tiposdecredito">
+                    <span class="oi oi-cog" aria-hidden="true"></span> Tipos de Credito
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="tiposdeidentificacion">
+                    <span class="oi oi-cog" aria-hidden="true"></span> Tipos de Identificacion
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="tiposdemovimiento">
+                    <span class="oi oi-cog" aria-hidden="true"></span> Tipos de Movimiento
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="usuarios">
+                    <span class="oi oi-person" aria-hidden="true"></span> Usuarios
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="Administrador">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="variablesglobales">
+                    <span class="oi oi-cog" aria-hidden="true"></span> Variables Globales
+                </NavLink>
+            </li>
+        </AuthorizeView>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

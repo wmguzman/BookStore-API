@@ -31,6 +31,21 @@ namespace BookStore_API.Data
                 }
             }
 
+            if (await userManager.FindByEmailAsync("admin2@bookstore.com") == null)
+            {
+
+                var user = new IdentityUser
+                {
+                    UserName = "admin2",
+                    Email = "admin2@bookstore.com"
+                };
+                var result = await userManager.CreateAsync(user, "P@ssword1");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Administrator");
+                }
+            }
+
             if (await userManager.FindByEmailAsync("customer1@gmail.com") == null)
             {
                 var user = new IdentityUser

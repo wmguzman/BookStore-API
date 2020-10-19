@@ -1,0 +1,74 @@
+﻿@page "/books/"
+
+@attribute [Authorize]
+
+@inject IBookRepository _repository
+
+<h3>index</h3>
+
+@if (Model == null)
+{
+    <div class="alert alert-dismissible alert-secondary">
+        <LoadingMessage Message="Loading Data..." />
+    </div>
+}
+else
+{
+    <AuthorizeView Roles="Administrator">
+        <a href="/books/create" class="btn btn-primary">
+            <span class="oi oi-plus"></span>
+            Create new Book
+        </a>
+    </AuthorizeView>
+    @if (Model.Count < 1)
+    {
+        <div class="alert alert-dismissible alert-secondary">
+            <LoadingMessage Message="There are no authors in the data store. Create an author to begin." />
+        </div>
+    }
+    else
+    {
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                <tr>
+                    <td>
+                        <img src="uploads/@book.Image" style="height:50px;width:50px" />
+                    </td>
+                    <td>@book.Title</td>
+                    <td>@book.Price</td>
+                    <td>@book.Author.Firstname @book.Author.Lastname</td>
+                    <td>
+                        <a href="/books/view/@book.Id" class="btn btn-primary"><span class="oi oi-book"></span></a>
+                        <a href="/books/edit/@book.Id" class="btn btn-warning"><span class="oi oi-pencil"></span></a>
+                        <a href="/books/delete/@book.Id" class="btn btn-danger"><span class="oi oi-delete"></span></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+
+
+
+
+@code {
+    private IList<Book> Model;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Model = await _repository.Get(Endpoints.BooksEndpoint);
+    }
+}

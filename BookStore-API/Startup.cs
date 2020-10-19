@@ -90,7 +90,11 @@ namespace BookStore_API
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
 
-            services.AddControllers();
+
+            //Modificado para usar  Newtonsoft
+            services.AddControllers().AddNewtonsoftJson(op =>
+                op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //services.AddControllers()
             //services.AddRazorPages();
         }
 

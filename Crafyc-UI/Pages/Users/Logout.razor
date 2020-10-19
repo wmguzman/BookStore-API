@@ -1,0 +1,17 @@
+﻿@page "/logout"
+
+@using Crafyc_UI.Models
+@using Crafyc_UI.Contracts
+@using Crafyc_UI.Services
+
+@inject NavigationManager _navigation
+@inject IAuthenticationRepository _repository
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await _repository.Logout();
+        _navigation.NavigateTo("/");
+    }
+
+}
